@@ -3,13 +3,15 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import { Auth, ThemeSupa } from '@supabase/auth-ui-react'
-import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
+import { useSession, useSupabaseClient, useUser } from '@supabase/auth-helpers-react'
 
 
 
 const Home: NextPage = () => {
   const session = useSession()
   const supabase = useSupabaseClient()
+  const user = useUser()
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
       <Head>
@@ -26,17 +28,17 @@ const Home: NextPage = () => {
         </h1>
 
         <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
-
-
-          <a
-            href="/login"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Login &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Go login now
-            </p>
-          </a>
+          {!user && (
+            <a
+              href="/login"
+              className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
+            >
+              <h3 className="text-2xl font-bold">Login &rarr;</h3>
+              <p className="mt-4 text-xl">
+                Go login now
+              </p>
+            </a>
+          )}
 
           <a
             href="/display"

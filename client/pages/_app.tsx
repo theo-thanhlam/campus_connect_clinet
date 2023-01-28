@@ -8,8 +8,9 @@ import { useState } from 'react'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [supabase] = useState(() => createBrowserSupabaseClient())
-  
+
   return(
+    
     <SessionContextProvider supabaseClient={supabase} initialSession={pageProps.initialSession}>
       <Component {...pageProps} />
     </SessionContextProvider> 
