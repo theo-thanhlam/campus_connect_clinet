@@ -6,6 +6,12 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Auth, ThemeSupa } from '@supabase/auth-ui-react'
 
+const Logout = ({session}: any)=>{
+  async function signout(){
+    const {error} = await supabase.auth.sighout()
+  }
+}
+
 const Login = ({session}: any) => {
   const supabaseClient = useSupabaseClient()
   const user = useUser()
