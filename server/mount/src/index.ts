@@ -13,11 +13,11 @@ app.use(express.json())
 app.use(cors())
 app.options('*', cors())
 
-app.use('/api/v1', v1)
+//app.use('/api/v1', v1)
 
 app.get('/', (req, res) => {
   return res.status(200).json({
-    message: 'pong'
+    message: 'Ping'
   })
 })
 
