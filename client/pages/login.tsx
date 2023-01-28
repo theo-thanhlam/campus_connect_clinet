@@ -7,9 +7,16 @@ import { useRouter } from 'next/router'
 import { Auth, ThemeSupa } from '@supabase/auth-ui-react'
 
 const Logout = ({session}: any)=>{
-  async function signout(){
-    const {error} = await supabase.auth.sighout()
+  const supabaseClient = useSupabaseClient()
+  async function signOut(){
+    await supabaseClient.auth.signOut()
   }
+
+  return (
+    <div>
+      <button onClick={signOut}></button>
+    </div>
+  )
 }
 
 const Login = ({session}: any) => {
