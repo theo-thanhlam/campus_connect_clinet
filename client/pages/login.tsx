@@ -6,7 +6,10 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Auth, ThemeSupa } from '@supabase/auth-ui-react'
 
-const Logout = ({session}: any)=>{
+
+
+
+export const Logout = ({session}: any)=>{
   const supabaseClient = useSupabaseClient()
   async function signOut(){
     await supabaseClient.auth.signOut()
@@ -14,7 +17,12 @@ const Logout = ({session}: any)=>{
 
   return (
     <div>
-      <button onClick={signOut}></button>
+      <div onClick={signOut} className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600 cursor-pointer">
+        <h3 className="text-2xl font-bold">Logout &rarr;</h3>
+        <p className="mt-4 text-xl">
+          Logout now
+        </p>
+      </div>
     </div>
   )
 }
