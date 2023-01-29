@@ -4,9 +4,11 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { ChangeEvent, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
+import { useRouter } from 'next/router'
 const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL
 
 const Display = () => {
+    const router = useRouter()
     const user = useUser()
     const { acceptedFiles, getRootProps, getInputProps } = useDropzone()
     const files = acceptedFiles.map(file => (
@@ -16,25 +18,27 @@ const Display = () => {
     ))
 
 
-    const submitFiles = async (event: any) => {
-        event.preventDefault()
+  const submitFiles = async (event: any) => {
+      event.preventDefault()
 
-        const formData = new FormData()
-        acceptedFiles.forEach(file => formData.append('files', file))
-        formData.append('class_name', '1012')
-        formData.append('class_year', '2022')
+      const formData = new FormData()
+      acceptedFiles.forEach(file => formData.append('files', file))
+      formData.append('class_name', '1012')
+      formData.append('class_year', '2022')
 
-        const response = await fetch(`${SERVER_URL}/files/upload`, {
-            method: 'POST',
-            // headers: {
-            //   'Content-Type': 'multipart/form-data'
-            // },
-            body: formData
-        })
-        const data = await response.json()
-    }
+      const response = await fetch(`${SERVER_URL}/files/upload`, {
+          method: 'POST',
+          // headers: {
+          //   'Content-Type': 'multipart/form-data'
+          // },
+          body: formData
+      })
+      const data = await response.json()
+
+      router.reload()
+  }
     
-    return (
+  return (
     <>
         <div className="p-12 text-center bg-white-100 text-white-700">
           {!user && (
